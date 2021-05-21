@@ -52,8 +52,8 @@ class HLSStreamWriter(SegmentedStreamWriter):
         self.ignore_names = False
         ignore_names = {*options.get("hls-segment-ignore-names")}
         if ignore_names:
-            segments = "|".join(map(re.escape, ignore_names))
-            self.ignore_names = re.compile(rf"(?:{segments})\.ts", re.IGNORECASE)
+            segments = "".join(map(re.escape, ignore_names))
+            self.ignore_names = re.compile(rf"(?:{segments}).*\.ts", re.IGNORECASE)
 
     def create_decryptor(self, key, sequence):
         if key.method != "AES-128":
